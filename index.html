@@ -213,7 +213,7 @@
       border-radius: 999px;
       border: 3px solid var(--accent);
       box-shadow: 0 0 18px rgba(51,239,242,.18);
-      padding: 2px; /* “gap” para borda ficar fora */
+      padding: 1px; /* “gap” para borda ficar fora */
       background: rgba(0,0,0,.18);
     }
     .avatar{
@@ -401,7 +401,7 @@
           <section class="repos">
             <div class="reposTitle">
               <div class="dot"></div>
-              <div>Repositórios recentes</div>
+              <div>Projetos</div>
             </div>
 
             <div class="repoGrid" id="repoGrid" aria-live="polite">
@@ -454,28 +454,30 @@
       }
 
       async function loadRepos() {
-        const r = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=pushed`, {
-          headers: { "Accept": "application/vnd.github+json" }
-        });
-        if (!r.ok) throw new Error("Falha ao buscar repositórios.");
-        const repos = await r.json();
-
-        const list = repos
-          .filter(x => !x.fork)
-          .sort((a,b) => new Date(b.pushed_at) - new Date(a.pushed_at))
-          .slice(0, 6);
-
+        // Coloque aqui os seus pinned NA ORDEM que você quer mostrar
+        const pinned = ["BenaPRO", "Bena", "BenIAN", "BenaSPMA"];
+      
+        const headers = { "Accept": "application/vnd.github+json" };
+      
+        const repos = await Promise.all(
+          pinned.map(async (name) => {
+            const r = await fetch(`https://api.github.com/repos/${username}/${name}`, { headers });
+            if (!r.ok) return null; // se algum repo não existir/privado, só ignora
+            return await r.json();
+          })
+        );
+      
+        const list = repos.filter(Boolean);
+      
         repoGrid.innerHTML = list.map(repo => {
           const desc = repo.description ? esc(repo.description) : "Sem descrição.";
           const lang = repo.language ? `<span class="badge">${esc(repo.language)}</span>` : "";
           const stars = `<span class="badge">★ ${repo.stargazers_count}</span>`;
           const updated = `<span class="badge">Atualizado: ${fmtDate(repo.pushed_at)}</span>`;
-
+      
           return `
             <div class="repo">
-              <div class="corner" title="Abrir">
-                ↗
-              </div>
+              <div class="corner" title="Abrir">↗</div>
               <a href="${repo.html_url}" target="_blank" rel="noreferrer">${esc(repo.name)}</a>
               <p>${desc}</p>
               <div class="badges">
