@@ -1,1 +1,406 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Matheus Augusto | GitHub</title>
+  <meta name="description" content="Computer Vision & Biometrics. Python | OpenCV | PyQt | Machine Learning. Projetos e repositórios no GitHub." />
+
+  <!-- Open Graph (LinkedIn) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Matheus Augusto | GitHub" />
+  <meta property="og:description" content="Computer Vision & Biometrics. Python | OpenCV | PyQt | Machine Learning. Projetos e repositórios no GitHub." />
+  <meta property="og:image" content="https://mathsto19.github.io/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="627" />
+  <meta property="og:url" content="https://mathsto19.github.io/" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#0B1220" />
+
+  <style>
+    :root{
+      --bg: #0b1220;
+      --bg2:#07101f;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.12);
+      --text: #e8eefc;
+      --muted:#b6c2d9;
+      --accent:#33eff2;
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --radius: 18px;
+      --max: 980px;
+    }
+
+    *{ box-sizing:border-box; }
+    html, body{ height:100%; }
+    body{
+      margin:0;
+      color:var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 60% 30%, rgba(51,239,242,.08), transparent 55%),
+        radial-gradient(900px 500px at 15% 65%, rgba(232,238,252,.06), transparent 50%),
+        repeating-linear-gradient(135deg, rgba(255,255,255,.07) 0px, rgba(255,255,255,.07) 1px, transparent 1px, transparent 28px),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 44px 18px 56px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+      opacity:.95;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 650;
+      letter-spacing:.2px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;background:var(--accent);
+      box-shadow: 0 0 22px rgba(51,239,242,.45);
+    }
+    .mini-links{
+      display:flex; gap:10px; flex-wrap:wrap;
+      font-size: 13px; color: rgba(232,238,252,.85);
+    }
+    .mini-links a{
+      padding:6px 10px;
+      border:1px solid rgba(255,255,255,.16);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+    }
+    .mini-links a:hover{ border-color: rgba(51,239,242,.6); }
+
+    .hero{
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(700px 340px at 70% 25%, rgba(51,239,242,.12), transparent 60%),
+        radial-gradient(600px 300px at 25% 65%, rgba(232,238,252,.09), transparent 55%);
+      pointer-events:none;
+    }
+
+    .hero-inner{
+      position:relative;
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap: 26px;
+      padding: 26px;
+    }
+
+    .avatar-block{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .avatar{
+      width: 240px;
+      height: 240px;
+      border-radius: 999px;
+      position:relative;
+      background: rgba(0,0,0,.25);
+      overflow:hidden;
+    }
+    .avatar::before{
+      content:"";
+      position:absolute;
+      inset:-8px;
+      border-radius:999px;
+      border: 3px solid rgba(51,239,242,.95);
+      box-shadow: 0 0 26px rgba(51,239,242,.25);
+      pointer-events:none;
+    }
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform: translateZ(0);
+    }
+
+    .title{
+      margin: 6px 0 8px;
+      font-size: 56px;
+      line-height: 1.02;
+      letter-spacing: .2px;
+      text-shadow: 0 3px 0 rgba(0,0,0,.45);
+    }
+    .subtitle{
+      margin:0 0 12px;
+      font-size: 28px;
+      color: var(--accent);
+      letter-spacing: .2px;
+    }
+    .stack{
+      margin:0 0 14px;
+      font-size: 20px;
+      color: rgba(182,194,217,.95);
+    }
+    .about{
+      margin: 0 0 18px;
+      font-size: 16px;
+      line-height: 1.55;
+      color: rgba(232,238,252,.9);
+      max-width: 62ch;
+    }
+
+    .btns{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-top: 6px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      font-weight: 650;
+      letter-spacing:.2px;
+      user-select:none;
+    }
+    .btn.primary{
+      background: var(--accent);
+      border-color: rgba(51,239,242,.95);
+      color: #061018;
+    }
+    .btn:hover{ border-color: rgba(51,239,242,.55); }
+    .btn.primary:hover{ filter: brightness(1.03); }
+
+    .section{
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .section h2{
+      margin: 0 0 12px;
+      font-size: 16px;
+      letter-spacing: .3px;
+      color: rgba(232,238,252,.92);
+      display:flex; align-items:center; gap:10px;
+    }
+    .section h2 .bar{
+      width: 10px; height: 10px; border-radius:999px; background: var(--accent);
+      box-shadow: 0 0 18px rgba(51,239,242,.35);
+    }
+
+    .repos{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .repo{
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .repo:hover{ border-color: rgba(51,239,242,.45); }
+    .repo .name{
+      font-weight: 750;
+      margin-bottom: 6px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .repo .desc{
+      margin:0 0 10px;
+      color: rgba(182,194,217,.95);
+      font-size: 13px;
+      line-height:1.35;
+      min-height: 2.7em;
+    }
+    .repo .meta{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      font-size: 12px;
+      color: rgba(232,238,252,.78);
+    }
+    .pill{
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+    }
+
+    .footer{
+      margin-top: 16px;
+      font-size: 12px;
+      color: rgba(182,194,217,.85);
+      opacity:.95;
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width: 860px){
+      .hero-inner{ grid-template-columns: 1fr; }
+      .avatar{ width: 190px; height: 190px; }
+      .title{ font-size: 44px; }
+      .subtitle{ font-size: 22px; }
+      .stack{ font-size: 16px; }
+      .repos{ grid-template-columns: 1fr; }
+      .avatar-block{ justify-content:flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand"><span class="dot"></span> mathsto19.github.io</div>
+      <div class="mini-links">
+        <a href="https://github.com/Mathsto19" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/matheusaugustoolveira" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="http://lattes.cnpq.br/0478101315062053" target="_blank" rel="noopener">Lattes</a>
+      </div>
+    </div>
+
+    <main class="hero">
+      <div class="hero-inner">
+        <div class="avatar-block">
+          <!-- Puxa automaticamente a sua foto do GitHub -->
+          <div class="avatar">
+            <img
+              src="https://github.com/Mathsto19.png?size=460"
+              alt="Foto de perfil de Matheus Augusto"
+              loading="eager"
+            />
+          </div>
+        </div>
+
+        <div>
+          <h1 class="title">Matheus Augusto</h1>
+          <div class="subtitle">Computer Vision &amp; Biometrics</div>
+          <div class="stack">Python | OpenCV | PyQt | Machine Learning</div>
+
+          <p class="about">
+            Este é meu hub rápido de links e projetos. Se você veio do LinkedIn, o botão abaixo abre meu GitHub,
+            e aqui embaixo você também vê meus repositórios mais recentes.
+          </p>
+
+          <div class="btns">
+            <a class="btn primary" href="https://github.com/Mathsto19" target="_blank" rel="noopener">
+              Abrir GitHub
+            </a>
+            <a class="btn" href="https://linkedin.com/in/matheusaugustoolveira" target="_blank" rel="noopener">
+              LinkedIn
+            </a>
+            <a class="btn" href="http://lattes.cnpq.br/0478101315062053" target="_blank" rel="noopener">
+              Lattes
+            </a>
+          </div>
+
+          <section class="section" style="margin-top:16px;">
+            <h2><span class="bar"></span>Repositórios recentes</h2>
+            <div id="repos" class="repos">
+              <div class="repo">
+                <div class="name">Carregando…</div>
+                <p class="desc">Buscando seus repositórios mais recentes no GitHub.</p>
+                <div class="meta"><span class="pill">GitHub API</span></div>
+              </div>
+            </div>
+          </section>
+
+          <div class="footer">
+            <div>OG preview: <strong>og.png</strong> (para LinkedIn)</div>
+            <div><a href="https://mathsto19.github.io/og.png" target="_blank" rel="noopener">ver og.png</a></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      const user = "Mathsto19";
+      const el = document.getElementById("repos");
+
+      function fmtDate(iso){
+        try{
+          const d = new Date(iso);
+          return d.toLocaleDateString("pt-BR", { year:"numeric", month:"short", day:"2-digit" });
+        }catch(e){ return ""; }
+      }
+
+      async function loadRepos(){
+        const url = `https://api.github.com/users/${user}/repos?per_page=6&sort=updated`;
+        const r = await fetch(url, { headers: { "Accept": "application/vnd.github+json" }});
+        if(!r.ok) throw new Error("GitHub API falhou");
+        const data = await r.json();
+
+        // filtra forks (se quiser mostrar forks, remova essa linha)
+        const repos = (data || []).filter(x => !x.fork).slice(0, 6);
+
+        if(!repos.length){
+          el.innerHTML = `
+            <div class="repo">
+              <div class="name">Nenhum repo encontrado</div>
+              <p class="desc">Verifique se seu usuário está correto.</p>
+            </div>`;
+          return;
+        }
+
+        el.innerHTML = repos.map(repo => {
+          const desc = (repo.description || "Sem descrição.").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+          const lang = repo.language ? `<span class="pill">${repo.language}</span>` : "";
+          const stars = `<span class="pill">★ ${repo.stargazers_count || 0}</span>`;
+          const updated = `<span class="pill">Atualizado: ${fmtDate(repo.updated_at)}</span>`;
+          return `
+            <a class="repo" href="${repo.html_url}" target="_blank" rel="noopener">
+              <div class="name">
+                <span>${repo.name}</span>
+                <span style="opacity:.75;font-size:12px;">↗</span>
+              </div>
+              <p class="desc">${desc}</p>
+              <div class="meta">${lang}${stars}${updated}</div>
+            </a>
+          `;
+        }).join("");
+      }
+
+      loadRepos().catch(() => {
+        el.innerHTML = `
+          <div class="repo">
+            <div class="name">Não deu para carregar</div>
+            <p class="desc">O GitHub pode ter limitado requisições. Ainda assim, seu botão “Abrir GitHub” funciona normalmente.</p>
+            <div class="meta"><span class="pill">fallback ok</span></div>
+          </div>
+        `;
+      });
+    })();
+  </script>
+</body>
+</html>
 
