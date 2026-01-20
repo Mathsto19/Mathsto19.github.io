@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <title>Matheus Augusto | GitHub</title>
-  <meta name="description" content="Hub rápido com meus links e projetos. Computer Vision & Biometrics. Python | OpenCV | PyQt | Machine Learning." />
+  <meta name="description" content="Hub rápido com links e projetos. Computer Vision & Biometrics. Python | OpenCV | PyQt | Machine Learning." />
 
   <!-- Open Graph (LinkedIn) -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Matheus Augusto | GitHub" />
-  <meta property="og:description" content="Hub rápido com meus links e projetos. Computer Vision & Biometrics. Python | OpenCV | PyQt | Machine Learning." />
+  <meta property="og:description" content="Hub rápido com links e projetos. Computer Vision & Biometrics. Python | OpenCV | PyQt | Machine Learning." />
   <meta property="og:image" content="https://mathsto19.github.io/og.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="627" />
   <meta property="og:url" content="https://mathsto19.github.io/" />
-
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#0b1220" />
 
   <style>
     :root{
@@ -28,6 +28,11 @@
       --accent:#33eff2;
       --shadow: rgba(0,0,0,.35);
       --r:18px;
+
+      /* Ajustes rápidos de “caber em 1 tela” */
+      --wrap-pad: 16px;
+      --inner-pad: 18px;
+      --avatar-size: 210px; /* se ainda estiver alto, baixa pra 195 */
     }
 
     *{ box-sizing:border-box; }
@@ -37,7 +42,6 @@
       color:var(--text);
       font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
 
-      /* Fundo “na pegada” (diagonal + leve vinheta) */
       background:
         radial-gradient(1200px 700px at 55% 35%, rgba(51,239,242,.10), transparent 60%),
         radial-gradient(900px 600px at 10% 80%, rgba(255,255,255,.06), transparent 55%),
@@ -49,13 +53,25 @@
         ),
         var(--bg);
     }
-
     a{ color:inherit; }
+
+    /* Desktop: 1 tela, sem scroll do body */
+    @media (min-width: 901px){
+      body{ overflow:hidden; }
+    }
+    /* Mobile: deixa rolar normal */
+    @media (max-width: 900px){
+      body{ overflow:auto; }
+    }
 
     .wrap{
       max-width: 1100px;
       margin: 0 auto;
-      padding: 22px 18px 38px;
+      padding: var(--wrap-pad);
+      height: 100vh;
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
     }
 
     /* Top bar */
@@ -63,8 +79,8 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:14px;
-      margin-bottom:14px;
+      gap:12px;
+      flex: 0 0 auto;
     }
 
     .brand{
@@ -75,16 +91,16 @@
       letter-spacing:.2px;
       opacity:.95;
       user-select:none;
+      min-width: 160px;
     }
     .dot{
       width:10px; height:10px;
       border-radius:999px;
       background:var(--accent);
       box-shadow:0 0 16px rgba(51,239,242,.35);
+      flex: 0 0 auto;
     }
-    .brand span{
-      font-size:15px;
-    }
+    .brand span{ font-size:15px; }
 
     .toplinks{
       display:flex;
@@ -100,6 +116,7 @@
       border:1px solid rgba(255,255,255,.20);
       background:rgba(255,255,255,.04);
       transition: transform .08s ease, background .12s ease, border-color .12s ease;
+      white-space:nowrap;
     }
     .chip:hover{
       transform: translateY(-1px);
@@ -114,39 +131,49 @@
       border-radius: var(--r);
       box-shadow: 0 18px 45px var(--shadow);
       overflow:hidden;
+
+      /* ocupa o resto da tela */
+      flex: 1 1 auto;
+      min-height: 0; /* necessário pra scroll interno funcionar */
     }
 
     .inner{
-      padding: 24px 24px 18px;
+      padding: var(--inner-pad);
+      height: 100%;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      min-height: 0;
     }
 
-    /* HERO (sem a foto aqui) */
+    /* HERO */
     .hero{
       text-align:center;
-      padding: 10px 8px 18px;
+      padding: 6px 6px 8px;
+      flex: 0 0 auto;
     }
     h1{
-      margin: 0 0 6px;
-      font-size: clamp(34px, 4.2vw, 54px);
+      margin: 0 0 4px;
+      font-size: clamp(32px, 4vw, 52px);
       letter-spacing:.2px;
       text-shadow: 0 2px 0 rgba(0,0,0,.35);
     }
     .tag{
-      margin:0 0 10px;
+      margin:0 0 6px;
       color: var(--accent);
-      font-size: clamp(18px, 2vw, 26px);
+      font-size: clamp(16px, 1.9vw, 24px);
     }
     .stack{
-      margin:0 0 14px;
+      margin:0 0 10px;
       color: var(--muted);
-      font-size: clamp(14px, 1.5vw, 18px);
+      font-size: clamp(13px, 1.4vw, 17px);
     }
     .desc{
-      margin: 0 auto 16px;
-      max-width: 760px;
+      margin: 0 auto 10px;
+      max-width: 820px;
       color: rgba(232,238,252,.85);
-      line-height: 1.5;
-      font-size: 14.5px;
+      line-height: 1.45;
+      font-size: 14px;
     }
 
     .btns{
@@ -154,7 +181,7 @@
       gap:10px;
       justify-content:center;
       flex-wrap:wrap;
-      margin-top: 6px;
+      margin-top: 4px;
     }
     .btn{
       text-decoration:none;
@@ -165,6 +192,7 @@
       border:1px solid rgba(255,255,255,.18);
       background: rgba(255,255,255,.04);
       transition: transform .08s ease, background .12s ease, border-color .12s ease;
+      white-space:nowrap;
     }
     .btn:hover{ transform: translateY(-1px); }
     .btn.primary{
@@ -172,39 +200,47 @@
       color: #071015;
       border-color: rgba(0,0,0,.10);
     }
-    .btn.primary:hover{
-      background: rgba(51,239,242,.92);
-    }
+    .btn.primary:hover{ background: rgba(51,239,242,.92); }
 
-    /* GRID: foto alinhada com repos (como você pediu) */
+    /* GRID: mesma altura nos dois cards */
     .grid{
       display:grid;
       grid-template-columns: 280px 1fr;
-      gap: 18px;
-      align-items:start;
-      padding: 8px 8px 18px;
-      margin-top: 6px;
+      gap: 14px;
+      align-items: stretch;        /* <- aqui é o ponto-chave */
+      flex: 1 1 auto;
+      min-height: 0;              /* <- permite overflow interno */
+      padding: 2px 2px 8px;
     }
 
-    .profile{
-      padding: 10px 10px 14px;
+    .profile, .repos{
       border-radius: 16px;
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
+      height: 100%;              /* <- garante “mesma altura” */
+      min-height: 0;
+    }
+
+    .profile{
+      padding: 10px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      justify-content: space-between;
     }
 
     .avatarWrap{
       display:flex;
       justify-content:center;
-      padding: 8px 0 10px;
+      padding-top: 4px;
     }
     .avatarRing{
-      width: 230px;
-      height: 230px;
+      width: var(--avatar-size);
+      height: var(--avatar-size);
       border-radius: 999px;
       border: 3px solid var(--accent);
       box-shadow: 0 0 18px rgba(51,239,242,.18);
-      padding: 2px; /* “gap” para borda ficar fora */
+      padding: 6px;
       background: rgba(0,0,0,.18);
     }
     .avatar{
@@ -217,7 +253,6 @@
     }
 
     .profileMeta{
-      margin-top: 6px;
       text-align:center;
       color: rgba(232,238,252,.80);
       font-size: 13px;
@@ -228,7 +263,6 @@
       gap:10px;
       justify-content:center;
       flex-wrap:wrap;
-      margin-top: 10px;
       font-size: 12.5px;
       color: rgba(232,238,252,.72);
     }
@@ -240,25 +274,32 @@
     }
 
     .repos{
-      padding: 10px 10px 14px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
+      padding: 10px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      min-height:0;
     }
 
     .reposTitle{
       display:flex;
       align-items:center;
       gap:10px;
-      margin: 6px 6px 12px;
+      margin: 2px 4px 2px;
       font-weight: 750;
+      flex: 0 0 auto;
     }
     .reposTitle .dot{ width:9px; height:9px; }
 
+    /* A lista de repositórios é quem rola (se precisar) */
     .repoGrid{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
+      overflow:auto;
+      padding-right: 4px;
+      flex: 1 1 auto;
+      min-height: 0;
     }
 
     .repo{
@@ -267,7 +308,8 @@
       background: rgba(255,255,255,.03);
       padding: 12px 12px 10px;
       position:relative;
-      min-height: 118px;
+      min-height: 112px;
+      cursor:pointer;
     }
     .repo a{
       text-decoration:none;
@@ -281,7 +323,6 @@
       font-size: 13px;
       line-height: 1.35;
     }
-
     .badges{
       display:flex;
       flex-wrap:wrap;
@@ -309,25 +350,38 @@
       place-items:center;
       opacity:.85;
       background: rgba(255,255,255,.02);
+      pointer-events:none;
     }
 
     .footerHint{
-      padding: 0 20px 18px;
       color: rgba(232,238,252,.65);
       font-size: 12.5px;
       text-align:center;
+      flex: 0 0 auto;
+      padding-top: 2px;
     }
 
     /* Responsivo */
     @media (max-width: 900px){
+      .wrap{ height:auto; }
+      .card{ min-height:auto; }
+      .inner{ height:auto; }
       .grid{ grid-template-columns: 1fr; }
-      .repoGrid{ grid-template-columns: 1fr; }
-      .hero{ text-align:left; padding-left: 6px; padding-right: 6px; }
+      .repoGrid{ grid-template-columns: 1fr; overflow: visible; }
+      body{ overflow:auto; }
+      .hero{ text-align:left; }
       .btns{ justify-content:flex-start; }
+    }
+
+    /* Telas baixas: encolhe avatar pra caber */
+    @media (min-width: 901px) and (max-height: 780px){
+      :root{ --avatar-size: 190px; --inner-pad: 16px; --wrap-pad: 14px; }
+      .desc{ display:none; } /* opcional: garante 1 tela em monitores baixos */
     }
   </style>
 </head>
 
+<body>
   <div class="wrap">
     <div class="topbar">
       <div class="brand">
@@ -339,7 +393,7 @@
         <a class="chip" href="https://github.com/Mathsto19" target="_blank" rel="noreferrer">GitHub</a>
         <a class="chip" href="https://linkedin.com/in/matheusaugustoolveira" target="_blank" rel="noreferrer">LinkedIn</a>
         <a class="chip" href="http://lattes.cnpq.br/0478101315062053" target="_blank" rel="noreferrer">Lattes</a>
-        <a class="chip" href="./CV%20-%20Matheus.pdf" target="_blank" rel="noreferrer">Currículo</a>
+        <a class="chip" href="./cv-matheus.pdf" target="_blank" rel="noreferrer">Currículo</a>
       </div>
     </div>
 
@@ -351,35 +405,33 @@
           <div class="stack">Python | OpenCV | PyQt | Machine Learning</div>
 
           <p class="desc">
-              Aqui você encontra meus links principais e alguns projetos recentes. Se você chegou pelo LinkedIn, use os botões para abrir meu GitHub, LinkedIn, Lattes ou baixar meu currículo.
+            Links principais e alguns projetos recentes. Se você veio do LinkedIn, use os botões para abrir meu GitHub, LinkedIn, Lattes ou baixar meu currículo.
           </p>
 
           <div class="btns">
             <a class="btn primary" href="https://github.com/Mathsto19" target="_blank" rel="noreferrer">Abrir GitHub</a>
             <a class="btn" href="https://linkedin.com/in/matheusaugustoolveira" target="_blank" rel="noreferrer">LinkedIn</a>
             <a class="btn" href="http://lattes.cnpq.br/0478101315062053" target="_blank" rel="noreferrer">Lattes</a>
-            <a class="btn" href="./CV%20-%20Matheus.pdf" target="_blank" rel="noreferrer">Currículo</a>
+            <a class="btn" href="./cv-matheus.pdf" target="_blank" rel="noreferrer">Currículo</a>
           </div>
         </section>
 
-        <!-- Foto agora ALINHADA com os repositórios -->
         <div class="grid">
           <aside class="profile">
-            <div class="avatarWrap">
-              <div class="avatarRing">
-                <!-- Puxa automaticamente a foto do GitHub -->
-                <img
-                  class="avatar"
-                  id="avatar"
-                  src="https://github.com/Mathsto19.png?size=460"
-                  alt="Foto de perfil"
-                  loading="lazy"
-                />
+            <div>
+              <div class="avatarWrap">
+                <div class="avatarRing">
+                  <img
+                    class="avatar"
+                    id="avatar"
+                    src="https://github.com/Mathsto19.png?size=460"
+                    alt="Foto de perfil"
+                    loading="lazy"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div class="profileMeta" id="profileMeta">
-              github.com/Mathsto19
+              <div class="profileMeta" id="profileMeta">github.com/Mathsto19</div>
             </div>
 
             <div class="stats" id="stats" aria-live="polite">
@@ -394,12 +446,16 @@
             </div>
 
             <div class="repoGrid" id="repoGrid" aria-live="polite">
-              <div class="repo"><p>Carregando repositórios…</p></div>
+              <div class="repo" role="status" aria-live="polite">
+                <p>Carregando repositórios…</p>
+              </div>
             </div>
           </section>
         </div>
-      </div>
 
+        <div class="footerHint">
+          Dica: se o preview do LinkedIn não atualizar, use o “Post Inspector” para limpar o cache do link.
+        </div>
       </div>
     </div>
   </div>
@@ -461,10 +517,8 @@
           const updated = `<span class="badge">Atualizado: ${fmtDate(repo.pushed_at)}</span>`;
 
           return `
-            <div class="repo">
-              <div class="corner" title="Abrir">
-                ↗
-              </div>
+            <div class="repo" tabindex="0" role="link" data-url="${repo.html_url}">
+              <div class="corner" title="Abrir">↗</div>
               <a href="${repo.html_url}" target="_blank" rel="noreferrer">${esc(repo.name)}</a>
               <p>${desc}</p>
               <div class="badges">
@@ -475,6 +529,18 @@
             </div>
           `;
         }).join("");
+
+        // torna o card todo clicável
+        repoGrid.querySelectorAll(".repo[data-url]").forEach(el => {
+          const url = el.getAttribute("data-url");
+          el.addEventListener("click", () => window.open(url, "_blank", "noreferrer"));
+          el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              window.open(url, "_blank", "noreferrer");
+            }
+          });
+        });
       }
 
       (async () => {
@@ -484,7 +550,7 @@
           stats.innerHTML = `<div class="stat">Stats indisponíveis</div>`;
           repoGrid.innerHTML = `
             <div class="repo">
-              <p>Não consegui carregar os repositórios agora (rate limit/CORS). Você ainda pode acessar pelo botão “Abrir GitHub”.</p>
+              <p>Não consegui carregar os repositórios agora (rate limit). Você ainda pode acessar pelo botão “Abrir GitHub”.</p>
             </div>
           `;
         }
